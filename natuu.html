@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Digital Profesional</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>🍃</text></svg>") 16 0, auto;
+        }
+        .page-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        header {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/></svg>');
+            background-size: 100px 100px;
+            opacity: 0.5;
+        }
+        h1 {
+            margin: 0;
+            font-size: 3.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: nature-pulse 3s infinite;
+        }
+        @keyframes nature-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .container {
+            display: flex;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        main {
+            flex: 1;
+        }
+        .side-ads {
+            width: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .side-ad {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            height: 300px;
+        }
+        .side-ad:hover {
+            transform: translateY(-5px);
+        }
+        .side-ad img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .side-ad-content {
+            padding: 1rem;
+            text-align: center;
+        }
+        .side-ad h3 {
+            margin: 0 0 0.5rem;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+        .side-ad p {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+        .catalog {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .item:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .item:hover img {
+            transform: scale(1.1);
+        }
+        .item-content {
+            padding: 1rem;
+        }
+        .item h3 {
+            margin: 0 0 0.5rem;
+            color: var(--secondary-color);
+        }
+        .item p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .promo {
+            color: white;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+            text-align: left;
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+        #topPromo {
+            background: linear-gradient(135deg, #ff0000, #000000);
+        }
+        #middlePromo {
+            background: linear-gradient(135deg, #ffd700, #32cd32);
+        }
+        .promo img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .promo h2 {
+            margin-top: 0;
+        }
+        .contact {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 10px;
+        }
+        .contact h2 {
+            margin-top: 0;
+        }
+        @media (max-width: 1200px) {
+            .container {
+                flex-direction: column;
+            }
+            .side-ads {
+                width: 100%;
+                flex-direction: row;
+                justify-content: center;
+            }
+            .side-ad {
+                width: 120px;
+            }
+        }
+        @media (max-width: 768px) {
+            .catalog {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            .promo {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        .mascot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        .mascot img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .mascot-message {
+            font-size: 0.9rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <h1>Catálogo NATURA PAZ</h1>
+            <img src="GG.gif" alt="">
+        </header>
+        
+        <div class="container">
+            <aside class="side-ads" id="leftAds">
+                <div class="side-ad" id="leftAd1">
+                    <img src="" alt="En renta">
+                    <div class="side-ad-content">
+                        <h3>Espacio publicitario</h3>
+                        <p>¡CONTACTANOS! 55 30 85 44 78</p>
+                    </div>
+
+                    
+                </div>
+                <div class="side-ad" id="leftAd2">
+                    <img src="vpo.jpg" alt="Anuncio Lateral">
+                    <div class="side-ad-content">
+                        <h3>OFERTA VPOWER</h3>
+                        <p>1 X $5000</p>
+                    </div>
+                </div>
+            </aside>
+
+            <main>
+                <div class="promo" id="topPromo">
+                    <img src="vpo.jpg" alt="Oferta Especial">
+                    <div>
+                        <center><h2>Oferta Especial VPOWER</h2></center>
+                        <center><p>1 VPOWER $5000mxm (PRECIO NORMAL $7500mxm)</p></center>
+                    </div>
+                </div>
+
+                <div class="catalog" id="catalog"></div>
+
+                <div class="promo" id="middlePromo">
+                    <img src="R.png" alt="Nuevos Productos">
+                    <a href="https://www.facebook.com/profile.php?id=100094140785145&mibextid=kFxxJD">FACEBOOK</a>
+                    <a href="https://www.instagram.com/naturapaz1?igsh=bG1ibjd6YmIybGt1">INSTAGRAM</a>
+                    <div>
+                        <h2>VISITA NUESTRAS REDES SOCIALES</h2>
+                        <p>Para mayor información dale clic e ingresa a nuestras redes sociales</p>
+                    </div>
+                </div>
+
+                <div class="contact">
+                    <h2>REALIZA TU PEDIDO</h2>
+                    <p>Pedidos por wathsapp: <span id="phone">+52 55 85 97 88 80</span></p>
+                    <p>Teléfono : <span id="tel">+52 55 40 80 64 59</span></p>
+                    <p id="details">¡Pedidos unicamente por wathsapp! ¡NO dudes en contactarnos!</p>
+                </div>
+            </main>
+
+            <aside class="side-ads" id="rightAds">
+                <div class="side-ad" id="rightAd1">
+                    <img src="TONICO.png" alt="Anuncio Lateral">
+                    <div class="side-ad-content">
+                        <h3>NUEVO PRODUCTO</h3>
+                        <p>Tonico de noni</p>
+                    </div>
+                </div>
+                <div class="side-ad" id="rightAd2">
+                    <img src="gif.fw.png" alt="Anuncio Lateral">
+                    <div class="side-ad-content">
+                        <h3>NATURA PAZ</h3>
+                        <p>Agradece tu preferencia.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+    <div class="mascot">
+        <img src="mascota.jpg" alt="Mascota Eco">
+        <p class="mascot-message">¡Hola! Soy NAT, la mascota en este catálogo natural. ¡Juntos haremos un mundo más verde! nota: este catalogo esta echo para consulta. cualquier pedido tendra que ser por via wathsapp. ¡GRACIAS!</p>
+    </div>
+    <script>
+        // El script se mantiene sin cambios
+        const catalogItems = [
+            { img: 'CDS.PNG', title: 'CDS', description: 'CDS es un gas estabilizado en agua que ayuda al organismo a oxigenar la sangre y a eliminar patógenos como virus, bacterias y hongos $600MXM, BOTELLA DE 1L' },
+            { img: 'DMSO.PNG', title: 'DMSO', description: 'es una sustancia que actúa como desinflamatorio, tiene propiedades anticancerígenas y elimina dolores. GOTERO 40ML $150MXM Y FRASCO CON 120ML $400MXM' },
+            { img: 'MUCUNA.PNG', title: 'MUCUNA', description: 'La Mucuna Pruriens es una planta de la cuál se utilizan sus semillas, ya que son las que poseen las propiedades activas sobre nuestro organismo. FRASCO CON 100 CAPSULAS $350MXM' },
+            { img: 'TIERRA.PNG', title: 'TIERRA DE DIATOMEAS', description: 'Ataca y absorbe bacterias, hongos, protozoos, virus, endotoxinas, pesticidas, residuos de medicamentos, E-Coli y metales pesados. FRASCO CON 100 CAPSULAS O FRASCO CON 250gr EN POLVO $300MXM' },
+            { img: 'TREMENTINA.PNG', title: 'TREMENTINA', description: 'La Trementina es un producto resultante de la destilación de la resina que producenlos pinos. Ayuda a eliminar parásitos. FRASCO CON 250ML $400'},
+            { img: 'TREMENTINA.PNG', title: 'TREMENTINA', description: 'La Trementina es un producto resultante de la destilación de la resina que producenlos pinos. Ayuda a eliminar parásitos. FRASCO CON 250ML $400'},
+            { img: 'TREMENTINA.PNG', title: 'TREMENTINA', description: 'La Trementina es un producto resultante de la destilación de la resina que producenlos pinos. Ayuda a eliminar parásitos. FRASCO CON 250ML $400'},
+            { img: 'TREMENTINA.PNG', title: 'TREMENTINA', description: 'La Trementina es un producto resultante de la destilación de la resina que producenlos pinos. Ayuda a eliminar parásitos. FRASCO CON 250ML $400'},
+            { img: 'ZEOLITA.PNG', title:'ZEOLITA', description: 'Arcilla volcánica que ayuda a  eliminar los metales pesados del organismo, así como toxinas que ingerimos al comer y ayuda a distribuir minerales útiles como el calcio, sodio, magnesio y el fósforo. FRASCO CON 100 CAPSULAS O FRASCO CON 250gr $300MXM' }
+        ];
+
+        const catalogElement = document.getElementById('catalog');
+
+        catalogItems.forEach((item, index) => {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'item';
+            itemElement.style.animationDelay = `${index * 0.1}s`;
+            itemElement.innerHTML = `
+                <img src="${item.img}" alt="${item.title}">
+                <div class="item-content">
+                    <h3>${item.title}</h3>
+                    <p>${item.description}</p>
+                </div>
+            `;
+            catalogElement.appendChild(itemElement);
+        });
+
+        function updateContactInfo(phone, email, tel, details) {
+            document.getElementById('phone').textContent = phone;
+            document.getElementById('email').textContent = email;
+            document.getElementById('tel').textContent = tel;
+            document.getElementById('details').textContent = details;
+        }
+
+        function updatePromo(id, imgSrc, title, description) {
+            const promoElement = document.getElementById(id);
+            promoElement.innerHTML = `
+                <img src="${imgSrc}" alt="${title}">
+                <div>
+                    <h2>${title}</h2>
+                    <p>${description}</p>
+                </div>
+            `;
+        }
+
+        function updateSideAd(id, imgSrc, title, description) {
+            const adElement = document.getElementById(id);
+            adElement.innerHTML = `
+                <img src="${imgSrc}" alt="Anuncio Lateral">
+                <div class="side-ad-content">
+                    <h3>${title}</h3>
+                    <p>${description}</p>
+                </div>
+            `;
+        }
+
+        // Ejemplo de uso:
+        // updateContactInfo('+1 555 123 4567', 'ventas@empresa.com', '+1 555 987 6543', '¡Visita nuestra tienda física para una experiencia personalizada!');
+        // updatePromo('topPromo', '/ruta/a/imagen-oferta.jpg', '¡Gran Venta de Verano!', 'Hasta 50% de descuento en productos seleccionados.');
+        // updatePromo('middlePromo', '/ruta/a/imagen-nuevos.jpg', 'Colección Otoño', 'Prepárate para la nueva temporada con nuestros productos más cálidos.');
+        // updateSideAd('leftAd1', '/ruta/a/imagen-oferta.jpg', 'Oferta Flash', '¡Solo 24h! No te lo pierdas.');
+        // updateSideAd('rightAd1', '/ruta/a/imagen-envio.jpg', 'Envío Express', 'Recibe tu pedido en 1 día.');
+    </script>
+</body>
+</html>
